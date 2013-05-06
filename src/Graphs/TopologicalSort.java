@@ -15,7 +15,7 @@ public class TopologicalSort extends GraphProcessor{
 
     public TopologicalSort(Graph graph){
         this.graph = graph;
-        assert graph.isDirected() : "SparseMultiGraph isn't directed";
+        assert graph.isDirected() : "Graph isn't directed";
         DepthFirstSearch dfs = new DepthFirstSearch(graph, this);
     }
 

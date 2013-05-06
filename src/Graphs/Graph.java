@@ -13,10 +13,52 @@ import java.util.LinkedList;
 /**
  * @author Dimitry Poberezhny
  */
-interface Graph {
-    Iterable<Integer> adj(int v);
-    void add(int i, int j);
-    int V();
-    int E();
-    boolean isDirected();
+public class Graph {
+
+    private LinkedList<Integer> edgenodes[];
+    private boolean isDirected;
+    private int E;
+    final private int V;
+
+    public Graph(int V, boolean isDirected)
+    {
+        this.V = V;
+        this.isDirected = isDirected;
+
+        edgenodes = (LinkedList<Integer>[]) new LinkedList[V];
+        for(int i = 0; i < V; ++i)
+            edgenodes[i] = new LinkedList<Integer>();
+    }
+
+    public int V(){
+        return V;
+    }
+
+    public int E(){
+        return E;
+    }
+
+    public boolean isDirected(){
+        return isDirected;
+    }
+
+    public Iterable<Integer> adj(int v) {
+        return edgenodes[v];
+    }
+
+    public void add(int i, int j){
+        assert i < V && j < V : "Graph.add(" + i + "," + j + ") Out of range";
+        add_elem(i,j);
+        if(!isDirected)
+            add_elem(j,i);
+    }
+
+    private void add_elem(int i, int j){
+        if (edgenodes[i].contains(j))
+            return;
+        edgenodes[i].add(j);
+        E++;
+    }
+
+
 }

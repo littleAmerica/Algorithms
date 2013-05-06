@@ -1,4 +1,4 @@
-import Graphs.SparseMultiGraph;
+import Graphs.Graph;
 import Graphs.TopologicalSort;
 
 
@@ -16,7 +16,7 @@ public class main{
     static public void main(String[] args){
         System.out.println();
 
-        SparseMultiGraph graph = new SparseMultiGraph(13,true);
+        Graph graph = new Graph(13,true);
         String graphstr = readFile("resource/graph.txt");
         for(String elem: graphstr.split("\n")){
             String[] edge = elem.split("-");
