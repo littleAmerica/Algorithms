@@ -1,4 +1,7 @@
 import Graphs.Graph;
+import Graphs.MST.Edge;
+import Graphs.MST.EdgeWeightedGraph;
+import Graphs.MST.Prim;
 import Graphs.TopologicalSort;
 
 
@@ -16,16 +19,25 @@ public class main{
     static public void main(String[] args){
         System.out.println();
 
-        Graph graph = new Graph(13,true);
-        String graphstr = readFile("resource/graph.txt");
+        EdgeWeightedGraph graph = new EdgeWeightedGraph(250);
+        String graphstr = readFile("resource/MSTmedium.txt");
         for(String elem: graphstr.split("\n")){
-            String[] edge = elem.split("-");
-            graph.add(Integer.parseInt(edge[0]),Integer.parseInt(edge[1]));
+            String[] edge = elem.split(" ");
+            graph.add(new Edge(Integer.parseInt(edge[0]),Integer.parseInt(edge[1]), Double.parseDouble(edge[2])));
         }
 
-        for(int i: new TopologicalSort(graph).order()){
-            System.out.println(i);
-        }
+        Prim prim = new Prim(graph);
+        System.out.print(prim.weight());
+
+
+//        for(int i = 0; i < 8; i++){
+//            for(Edge edge : graph.adj(i))
+//                System.out.println(edge);
+//        }
+
+//        for(int i: new TopologicalSort(graph).order()){
+//            System.out.println(i);
+//        }
     }
 
 

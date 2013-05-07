@@ -19,8 +19,8 @@ public class EdgeWeightedGraph {
         if(V < 0) throw new IllegalArgumentException("Negative V");
         this.V = V;
         adj = (LinkedList<Edge>[])new LinkedList[V];
-        for(LinkedList<Edge> list: adj)
-            list = new LinkedList<Edge>();
+        for(int i = 0; i < V; ++i)
+            adj[i] = new LinkedList<Edge>();
     }
 
     public int V(){
@@ -42,5 +42,7 @@ public class EdgeWeightedGraph {
 
         adj[i].push(e);
         adj[j].push(e);
+        weight += e.weight();
+        E++;
     }
 }

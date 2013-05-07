@@ -1,5 +1,9 @@
 package Graphs.MST;
 
+import java.util.ArrayDeque;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
 /**
  * Created with IntelliJ IDEA.
  * User: monco
@@ -8,22 +12,53 @@ package Graphs.MST;
  * To change this template use File | Settings | File Templates.
  */
 public class Prim{
+    private Queue<Edge> MST;
+    private double weight;
+
     private EdgeWeightedGraph G;
     private int V;
-    private Edge[] MST;
     private boolean[] isMarked;
+    private PriorityQueue<Edge> pq = new PriorityQueue<Edge>();
 
     public Prim(EdgeWeightedGraph G){
         this.G = G;
         this.V = G.V;
         isMarked = new boolean[G.V];
-        MST = new Edge[V];
+        MST = new ArrayDeque<Edge>();
         for(int i = 0; i < V; ++i)
             if(!isMarked[i])
                 prim(i);
     }
 
-    private void prim(int w){
+    public double weight(){
+        return weight;
+    }
 
+    public Iterable<Edge> mst(){
+        return MST;
+    }
+
+    private void prim(int vertex){
+        scan(vertex);
+        while(!pq.isEmpty()){
+            Edge currentEdge = pq.poll();
+
+            int v = currentEdge.either();
+            int marked = isMarked[v] ? v : currentEdge.other(v);
+            int unmarked = !isMarked[v] ? v : currentEdge.other(v);
+            if(isMarked[unmarked])
+                continue;
+
+            weight += currentEdge.weight();
+            MST.add(currentEdge);
+            scan(unmarked);
+        }
+    }
+
+    private void scan(int v){
+        isMarked[v] = true;
+        for(Edge edge: G.adj(v))
+            if(!isMarked[edge.other(v)])
+                pq.add(edge);
     }
 }

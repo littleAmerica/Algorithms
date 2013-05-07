@@ -7,7 +7,7 @@ package Graphs.MST;
  * Time: 17:59
  * To change this template use File | Settings | File Templates.
  */
-public class Edge {
+public class Edge implements Comparable<Edge> {
     private int w;
     private int v;
     private double weight;
@@ -30,5 +30,17 @@ public class Edge {
         if(vertex == v) return w;
         else if(vertex == w) return v;
         else throw new IllegalArgumentException("Illegal vertex in edge");
+    }
+
+    @Override
+    public int compareTo(Edge other) {
+        if(this.weight < other.weight()) return -1;
+        else if(this.weight > other.weight()) return 1;
+        else return 0;
+    }
+
+    @Override
+    public String toString() {
+        return w + " " + v + " :" + weight;
     }
 }
