@@ -22,6 +22,7 @@ public class Graph {
 
     public Graph(int V, boolean isDirected)
     {
+        if(V <= 0) throw new IllegalArgumentException("Negative V");
         this.V = V;
         this.isDirected = isDirected;
 
@@ -47,7 +48,8 @@ public class Graph {
     }
 
     public void add(int i, int j){
-        assert i < V && j < V : "Graph.add(" + i + "," + j + ") Out of range";
+        if(i > 0 && j > 0 && i < V && j < V )
+            throw new IllegalArgumentException("Graph.add(" + i + "," + j + ") Out of range");
         add_elem(i,j);
         if(!isDirected)
             add_elem(j,i);

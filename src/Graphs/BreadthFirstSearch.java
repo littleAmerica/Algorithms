@@ -13,8 +13,9 @@ import java.util.Queue;
 public class BreadthFirstSearch{
     boolean[] isDiscovered;
     boolean[] isProccessed;
-
     int[] parentVertex;
+
+    Graph G;
     GraphProcessor graphProcessor;
 
     public BreadthFirstSearch(Graph G, int startV){
@@ -22,14 +23,15 @@ public class BreadthFirstSearch{
     }
 
     public BreadthFirstSearch(Graph G, int startV, GraphProcessor processor){
+        this.G = G;
         isDiscovered = new boolean[G.V()];
         isProccessed = new boolean[G.V()];
         parentVertex = new int[G.V()];
         graphProcessor = processor;
-        bfs(G,startV);
+        bfs(startV);
     }
 
-    private void bfs(Graph G, int start){
+    private void bfs(int start){
         isDiscovered[start] = true;
         Queue<Integer> queue = new LinkedList<Integer>();
         queue.add(start);
