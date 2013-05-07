@@ -1,6 +1,8 @@
 package Graphs.MST;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -33,6 +35,18 @@ public class EdgeWeightedGraph {
 
     public Iterable<Edge> adj(int v) {
         return adj[v];
+    }
+
+    public Iterable<Edge> edges(){
+        List<Edge> list = new ArrayList<Edge>(E/2);
+        for (int v = 0; v < V; v++) {
+            for (Edge e : adj(v)) {
+                if (e.other(v) > v) {
+                    list.add(e);
+                }
+            }
+        }
+        return list;
     }
 
     public void add(Edge e){
