@@ -21,24 +21,30 @@ public class main{
 
     static public void main(String[] args){
         System.out.println();
+        final int N = 10;
+//        EdgeWeightedGraph graph = new EdgeWeightedGraph(250);
+//        String graphstr = readFile("resource/MSTmedium.txt");
+//        for(String elem: graphstr.split("\n")){
+//            String[] edge = elem.split(" ");
+//            graph.add(new Edge(Integer.parseInt(edge[0]),Integer.parseInt(edge[1]), Double.parseDouble(edge[2])));
+//        }
+//
+//        Kruskal kruskal = new Kruskal(graph);
+//        Prim prim = new Prim(graph);
+//        System.out.println(prim.weight());
+//        System.out.println(kruskal.weight());
 
-        EdgeWeightedGraph graph = new EdgeWeightedGraph(250);
-        String graphstr = readFile("resource/MSTmedium.txt");
+        String graphstr = readFile("resource/smallUnion10.txt");
+        WeightedQuickUnion wqu = new WeightedQuickUnion(N);
         for(String elem: graphstr.split("\n")){
             String[] edge = elem.split(" ");
-            graph.add(new Edge(Integer.parseInt(edge[0]),Integer.parseInt(edge[1]), Double.parseDouble(edge[2])));
+            wqu.union(Integer.parseInt(edge[0]),Integer.parseInt(edge[1]));
         }
 
-        Kruskal kruskal = new Kruskal(graph);
-        Prim prim = new Prim(graph);
-        System.out.println(prim.weight());
-        System.out.println(kruskal.weight());
-
-        ArrayList<Double> ald = new ArrayList<Double>();
-        ald.add(4.4);
-        System.out.print(ald.size());
-
-
+//        System.out.println(wqu.count());
+//
+//        for(int i = 0; i < N; i++)
+//            System.out.println(i + " " + wqu.find(i));
 
 //        for(int i = 0; i < 8; i++){
 //            for(Edge edge : graph.adj(i))
