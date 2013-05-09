@@ -1,4 +1,4 @@
-package Graphs;
+package Algorithms.Graphs;
 
 /**
  * Created with IntelliJ IDEA.

@@ -1,4 +1,4 @@
-package Graphs.MST;
+package Algorithms.Graphs.MST;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
