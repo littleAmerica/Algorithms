@@ -16,11 +16,11 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
     // BST helper node data type
     private class Node {
-        private Key key;           // key
-        private Value val;         // associated data
-        private Node left, right;  // links to left and right subtrees
-        private boolean color;     // color of parent link
-        private int N;             // subtree count
+        private Key key;
+        private Value val;
+        private Node left, right;
+        private boolean color;
+        private int N;
 
         public Node(Key key, Value val, boolean color, int N) {
             this.key = key;
@@ -33,7 +33,6 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
     public void put(Key key, Value val) {
         root = put(root, key, val);
         root.color = BLACK;
-//        assert check();
     }
 
     private Node put(Node h, Key key, Value val) {
@@ -53,11 +52,6 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         return h;
     }
 
-    /*************************************************************************
-     *  red-black tree helper functions
-     *************************************************************************/
-
-    // make a left-leaning link lean to the right
     private Node rotateRight(Node h) {
         assert (h != null) && isRed(h.left);
         Node x = h.left;
@@ -70,7 +64,6 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         return x;
     }
 
-    // make a right-leaning link lean to the left
     private Node rotateLeft(Node h) {
         assert (h != null) && isRed(h.right);
         Node x = h.right;
@@ -83,9 +76,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         return x;
     }
 
-    // flip the colors of a node and its two children
     private void flipColors(Node h) {
-        // h must have opposite color of its two children
         assert (h != null) && (h.left != null) && (h.right != null);
         assert (!isRed(h) &&  isRed(h.left) &&  isRed(h.right))
                 || (isRed(h)  && !isRed(h.left) && !isRed(h.right));
@@ -97,7 +88,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
     private boolean isRed(Node x) {
         if (x == null) return false;
-        return (x.color == RED);
+        return  (x.color == RED);
     }
 
     private int size(Node x) {

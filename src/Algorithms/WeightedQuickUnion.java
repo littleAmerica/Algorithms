@@ -22,8 +22,6 @@ public class WeightedQuickUnion {
             id[i] = i;
             weights[i] = 1;
         }
-
-
     }
 
     public boolean connected(int i, int j){
@@ -44,12 +42,6 @@ public class WeightedQuickUnion {
             weights[w] += weights[v];
         }
         count--;
-
-        System.out.println("    " + i + "  " + j);
-        System.out.println(count());
-
-        for(int k = 0; k < id.length; k++)
-            System.out.println(k + " " + find(k));
     }
 
     public int count(){

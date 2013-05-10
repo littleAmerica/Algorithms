@@ -1,5 +1,7 @@
 package Algorithms.Graphs.MST;
 
+import Algorithms.WeightedQuickUnion;
+
 import java.util.ArrayDeque;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -16,35 +18,14 @@ public class Kruskal{
     private Queue<Edge> MST;
     private double weight;
 
-    private EdgeWeightedGraph G;
-    private int V;
     private PriorityQueue<Edge> pq = new PriorityQueue<Edge>();
-    private WeightedQuickSort
+    private WeightedQuickUnion quickUnion;
 
     public Kruskal(EdgeWeightedGraph G){
-        this.G = G;
-        this.V = G.V;
-        isMarked = new boolean[G.V];
-        MST = new ArrayDeque<Edge>(V - 1);
-
-        for(Edge edge: G.edges()){
-            pq.add(edge);
-        }
-
-        while( !pq.isEmpty() && MST.size() < V){
-            Edge currentEdge = pq.poll();
-            int v = currentEdge.either();
-            int w = currentEdge.other(v);
-            if(isMarked[v] && isMarked[w])
-                continue;
-            isMarked[v] = true;
-            isMarked[w] = true;
-            MST.add(currentEdge);
-            weight += currentEdge.weight();
-        }
+        quickUnion = new WeightedQuickUnion(G.V);
+        MST = new ArrayDeque<Edge>(G.V - 1);
+        findMST(G);
     }
-
-
 
     public double weight(){
         return weight;
@@ -52,5 +33,22 @@ public class Kruskal{
 
     public Iterable<Edge> mst(){
         return MST;
+    }
+
+    private void findMST(EdgeWeightedGraph G){
+        for(Edge edge: G.edges()){
+            pq.add(edge);
+        }
+
+        while( !pq.isEmpty() && MST.size() < G.V){
+            Edge currentEdge = pq.poll();
+            int v = currentEdge.either();
+            int w = currentEdge.other(v);
+            if(quickUnion.connected(w,v))
+                continue;
+            quickUnion.union(w,v);
+            MST.add(currentEdge);
+            weight += currentEdge.weight();
+        }
     }
 }

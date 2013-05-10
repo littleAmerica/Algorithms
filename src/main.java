@@ -1,14 +1,8 @@
-import Graphs.Graph;
-import Graphs.MST.Edge;
-import Graphs.MST.EdgeWeightedGraph;
-import Graphs.MST.Kruskal;
-import Graphs.MST.Prim;
-import Graphs.TopologicalSort;
+import Algorithms.Graphs.MST.*;
+import Algorithms.WeightedQuickUnion;
 
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,38 +16,23 @@ public class main{
     static public void main(String[] args){
         System.out.println();
         final int N = 10;
-//        EdgeWeightedGraph graph = new EdgeWeightedGraph(250);
-//        String graphstr = readFile("resource/MSTmedium.txt");
-//        for(String elem: graphstr.split("\n")){
-//            String[] edge = elem.split(" ");
-//            graph.add(new Edge(Integer.parseInt(edge[0]),Integer.parseInt(edge[1]), Double.parseDouble(edge[2])));
-//        }
-//
-//        Kruskal kruskal = new Kruskal(graph);
-//        Prim prim = new Prim(graph);
-//        System.out.println(prim.weight());
-//        System.out.println(kruskal.weight());
-
-        String graphstr = readFile("resource/smallUnion10.txt");
-        WeightedQuickUnion wqu = new WeightedQuickUnion(N);
+        EdgeWeightedGraph graph = new EdgeWeightedGraph(250);
+        String graphstr = readFile("resource/EWG250.txt");
         for(String elem: graphstr.split("\n")){
             String[] edge = elem.split(" ");
-            wqu.union(Integer.parseInt(edge[0]),Integer.parseInt(edge[1]));
+            graph.add(new Edge(Integer.parseInt(edge[0]),Integer.parseInt(edge[1]), Double.parseDouble(edge[2])));
         }
+        long timeout= System.currentTimeMillis();
+        Prim prim = new Prim(graph);
+        System.out.println("prim " + prim.weight() + " " + (System.currentTimeMillis() - timeout)/1000.0);
 
-//        System.out.println(wqu.count());
-//
-//        for(int i = 0; i < N; i++)
-//            System.out.println(i + " " + wqu.find(i));
+        timeout= System.currentTimeMillis();
+        Kruskal kruskal = new Kruskal(graph);
+        System.out.println("kruskal " + kruskal.weight() + " " + (System.currentTimeMillis() - timeout)/1000.0);
 
-//        for(int i = 0; i < 8; i++){
-//            for(Edge edge : graph.adj(i))
-//                System.out.println(edge);
-//        }
-
-//        for(int i: new TopologicalSort(graph).order()){
-//            System.out.println(i);
-//        }
+        timeout= System.currentTimeMillis();
+        Boruvka boruvka = new Boruvka(graph);
+        System.out.println("boruvka " + boruvka.weight() + " " + (System.currentTimeMillis() - timeout)/1000.0);
     }
 
 

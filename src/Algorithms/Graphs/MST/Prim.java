@@ -15,19 +15,17 @@ public class Prim{
     private Queue<Edge> MST;
     private double weight;
 
-    private EdgeWeightedGraph G;
-    private int V;
+    EdgeWeightedGraph G;
     private boolean[] isMarked;
     private PriorityQueue<Edge> pq = new PriorityQueue<Edge>();
 
     public Prim(EdgeWeightedGraph G){
         this.G = G;
-        this.V = G.V;
         isMarked = new boolean[G.V];
         MST = new ArrayDeque<Edge>();
-        for(int i = 0; i < V; ++i)
+        for(int i = 0; i < G.V; ++i)
             if(!isMarked[i])
-                prim(i);
+                findMST(i);
     }
 
     public double weight(){
@@ -38,7 +36,7 @@ public class Prim{
         return MST;
     }
 
-    private void prim(int vertex){
+    private void findMST(int vertex){
         scan(vertex);
         while(!pq.isEmpty()){
             Edge currentEdge = pq.poll();
