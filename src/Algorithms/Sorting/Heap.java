@@ -1,7 +1,5 @@
 package Algorithms.Sorting;
 
-import java.util.Arrays;
-
 /**
  * Created with IntelliJ IDEA.
  * User: d.poberezhny
@@ -10,38 +8,51 @@ import java.util.Arrays;
  * To change this template use File | Settings | File Templates.
  */
 public class Heap {
+    static private int BASE;
 
     public static void makeHeap(Comparable[] array){
-        for(int i = array.length / 2; i >= 0; i--){
+        for(int i = array.length / BASE; i >= 0; i--){
             sink(array, i, array.length);
         }
     }
 
+    public static void makeHeap(Comparable[] array, int base){
+        setBase(base);
+        makeHeap(array);
+    }
+
     public static void sort(Comparable[] array){
         makeHeap(array);
-        System.out.println(Arrays.toString(array));
         for(int i = array.length - 1; i > 0; --i){
             swap(array, 0, i);
             sink(array, 0, i);
-            System.out.println(Arrays.toString(array));
         }
     }
 
-    private static void sink(Comparable[] array, int i, int N){
-        int left = i * 2 + 1;
-        if(!(left  <  N ))
+    public static void sort(Comparable[] array, int base){
+        setBase(base);
+        sort(array);
+    }
+
+    private static void sink(Comparable[] array, int k, int N){
+        int child[] = new int[BASE];
+        child[0] = k * 2 + 1;
+        if(!(child[0] < N))
             return;
-        int right = left + 1;
-        int biggest;
-        if( !(right < N) || !(less(array,left,right)))
-            biggest = left;
-        else
-            biggest = right;
-        if((less(array,i,biggest))){
-            swap(array, i, biggest);
+        int biggest = child[0];
+        for(int i = 1; i < BASE; ++i)
+            if((child[i] = child[i-1] + 1) < N)
+                if(less(array, biggest, child[i]))
+                    biggest = child[i];
+            else
+                break;
+
+        if((less(array,k,biggest))){
+            swap(array, k, biggest);
             sink(array,biggest,N);
         }
     }
+
     private static boolean less(Comparable[] pq, int i, int j) {
         return pq[i].compareTo(pq[j]) < 0;
     }
@@ -51,4 +62,28 @@ public class Heap {
         pq[i] = pq[j];
         pq[j] = swap;
     }
+
+    public static int base(){
+        return BASE;
+    }
+
+    public static void setBase(int base){
+        BASE = base;
+    }
+
+    //    old version BASE = 2
+//    private static void sink(Comparable[] array, int i, int N){
+//        int left = i * 2 + 1;
+//        if(!(left  <  N ))
+//            return;
+//        int right = left + 1;
+//        int biggest = left;
+//        if( right < N && less(array,left,right))
+//            biggest = right;
+//
+//        if((less(array,i,biggest))){
+//            swap(array, i, biggest);
+//            sink(array,biggest,N);
+//        }
+//    }
 }
