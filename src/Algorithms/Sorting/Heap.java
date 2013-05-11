@@ -8,7 +8,7 @@ package Algorithms.Sorting;
  * To change this template use File | Settings | File Templates.
  */
 public class Heap {
-    static private int BASE;
+    static private int BASE = 2;
 
     public static void makeHeap(Comparable[] array){
         for(int i = array.length / BASE; i >= 0; i--){
@@ -42,19 +42,19 @@ public class Heap {
         int biggest = child[0];
         for(int i = 1; i < BASE; ++i)
             if((child[i] = child[i-1] + 1) < N)
-                if(less(array, biggest, child[i]))
+                if(less(array[biggest],array[child[i]]))
                     biggest = child[i];
             else
                 break;
 
-        if((less(array,k,biggest))){
+        if((less(array[k],array[biggest]))){
             swap(array, k, biggest);
             sink(array,biggest,N);
         }
     }
 
-    private static boolean less(Comparable[] pq, int i, int j) {
-        return pq[i].compareTo(pq[j]) < 0;
+    private static boolean less(Comparable p, Comparable q){
+        return p.compareTo(q) < 0;
     }
 
     private static void swap(Object[] pq, int i, int j) {
@@ -68,6 +68,7 @@ public class Heap {
     }
 
     public static void setBase(int base){
+        if(base < 2) throw new IllegalArgumentException("Heap base less 2");
         BASE = base;
     }
 

@@ -23,8 +23,8 @@ public class Quick {
         int key = to - 1;
 
         while (true){
-            while(less(array,low, key)) low++;
-            while(less(array, key, high)) high--;
+            while(less(array[low], array[key])) low++;
+            while(less(array[key], array[high])) high--;
             if(low < high)
                 swap(array,low++,high--);
             else
@@ -35,8 +35,8 @@ public class Quick {
         qsort(array,low + 1, to);
     }
 
-    private static boolean less(Comparable[] pq, int i, int j) {
-        return pq[i].compareTo(pq[j]) < 0;
+    private static boolean less(Comparable p, Comparable q){
+        return p.compareTo(q) < 0;
     }
 
     private static void swap(Object[] pq, int i, int j) {

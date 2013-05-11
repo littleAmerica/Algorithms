@@ -1,4 +1,4 @@
-import Algorithms.Sorting.Heap;
+import Algorithms.Sorting.*;
 
 
 import java.io.*;
@@ -36,7 +36,7 @@ public class main{
 
         Integer[] array = {4,5,6,7,3,9,2,3,2,1,4,7,7,5,4,3,2,1,4,6,7,8,6,5,6,7,8,6,4,3,3,5,6,7,8,4,3,2,4,5,6,7,4,3,2,21,4};
         System.out.println(Arrays.toString(array));
-        Heap.sort(array);
+        Insertion.sort(array);
         System.out.println(Arrays.toString(array));
     }
 
