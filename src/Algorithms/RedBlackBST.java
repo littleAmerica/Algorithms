@@ -129,6 +129,38 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> implements SortedMa
     }
 
     @Override
+    public boolean isEmpty() {
+        return root == null;
+    }
+
+    @Override
+    public Key firstKey() {
+        if(isEmpty())
+            return null;
+        Node current = root;
+        while(current.left != null ){
+            current = current.left;
+        }
+        return current.key;
+    }
+
+    @Override
+    public int size() {
+        return root.N;
+    }
+
+    @Override
+    public Key lastKey() {
+        if(isEmpty())
+            return null;
+        Node current = root;
+        while(current.right != null ){
+            current = current.right;
+        }
+        return current.key;
+    }
+
+    @Override
     public Set<Entry<Key, Value>> entrySet() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
@@ -154,21 +186,6 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> implements SortedMa
     }
 
     @Override
-    public Key firstKey() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public int size() {
-        return root.N;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
     public boolean containsKey(Object key) {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
@@ -191,11 +208,6 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> implements SortedMa
     @Override
     public void clear() {
         //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public Key lastKey() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override

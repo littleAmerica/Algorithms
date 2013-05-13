@@ -40,7 +40,7 @@ public class DirectedEdge implements Comparable<DirectedEdge> {
 
     @Override
     public String toString() {
-        return from + " " + to + " :" + weight;
+        return from + "->" + to + " w: " + weight;
     }
 
 }
