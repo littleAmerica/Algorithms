@@ -1,5 +1,8 @@
 package Algorithms.Graphs;
 
+import Algorithms.Graphs.Tools.Graph;
+import Algorithms.Graphs.Tools.GraphProcessor;
+
 import java.util.ArrayList;
 
 /**
@@ -9,7 +12,7 @@ import java.util.ArrayList;
  * Time: 12:33
  * To change this template use File | Settings | File Templates.
  */
-public class TopologicalSort extends GraphProcessor{
+public class TopologicalSort extends GraphProcessor {
     Graph graph;
     ArrayList<Integer> processedOrder = new ArrayList<Integer>();
 
@@ -20,7 +23,7 @@ public class TopologicalSort extends GraphProcessor{
     }
 
     @Override
-    protected void processVertexLate(int v) {
+    public void processVertexLate(int v) {
         processedOrder.add(v);
     }
 

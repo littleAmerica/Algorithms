@@ -1,5 +1,8 @@
 package Algorithms.Graphs;
 
+import Algorithms.Graphs.Tools.Graph;
+import Algorithms.Graphs.Tools.GraphProcessor;
+
 /**
  * Created with IntelliJ IDEA.
  * User: d.poberezhny

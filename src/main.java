@@ -1,3 +1,4 @@
+import Algorithms.RedBlackBST;
 import Algorithms.Sorting.*;
 
 
@@ -34,10 +35,20 @@ public class main{
 //        Boruvka boruvka = new Boruvka(graph);
 //        System.out.println("boruvka " + boruvka.weight() + " " + (System.currentTimeMillis() - timeout)/1000.0);
 
-        Integer[] array = {4,5,6,7,3,9,2,3,2,1,4,7,7,5,4,3,2,1,4,6,7,8,6,5,6,7,8,6,4,3,3,5,6,7,8,4,3,2,4,5,6,7,4,3,2,21,4};
-        System.out.println(Arrays.toString(array));
-        Insertion.sort(array);
-        System.out.println(Arrays.toString(array));
+//        Integer[] array = {4,5,6,7,3,9,2,3,2,1,4,7,7,5,4,3,2,1,4,6,7,8,6,5,6,7,8,6,4,3,3,5,6,7,8,4,3,2,4,5,6,7,4,3,2,21,4};
+//        System.out.println(Arrays.toString(array));
+ //       Insertion.sort(array);
+ //       System.out.println(Arrays.toString(array));
+
+        RedBlackBST<Character,Integer> redBlackBST = new RedBlackBST<Character, Integer>();
+        String red = "SEARCHEXAMPLE";
+        for(int i = 0; i < red.length(); ++i)
+            redBlackBST.put(red.charAt(i),i);
+
+        for(int i = 0; i < red.length(); ++i)
+            System.out.println(redBlackBST.get(red.charAt(i)));
+        System.out.print("\n" + redBlackBST.get(232));
+
     }
 
 

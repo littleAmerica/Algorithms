@@ -1,5 +1,7 @@
 package Algorithms.Graphs.MST;
 
+import Algorithms.Graphs.Tools.Edge;
+import Algorithms.Graphs.Tools.EdgeWeightedGraph;
 import Algorithms.WeightedQuickUnion;
 
 import java.util.ArrayDeque;
@@ -22,8 +24,8 @@ public class Kruskal{
     private WeightedQuickUnion quickUnion;
 
     public Kruskal(EdgeWeightedGraph G){
-        quickUnion = new WeightedQuickUnion(G.V);
-        MST = new ArrayDeque<Edge>(G.V - 1);
+        quickUnion = new WeightedQuickUnion(G.V());
+        MST = new ArrayDeque<Edge>(G.V() - 1);
         findMST(G);
     }
 
@@ -40,7 +42,7 @@ public class Kruskal{
             pq.add(edge);
         }
 
-        while( !pq.isEmpty() && MST.size() < G.V){
+        while( !pq.isEmpty() && MST.size() < G.V()){
             Edge currentEdge = pq.poll();
             int v = currentEdge.either();
             int w = currentEdge.other(v);

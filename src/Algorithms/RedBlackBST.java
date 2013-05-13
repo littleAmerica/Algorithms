@@ -1,5 +1,7 @@
 package Algorithms;
 
+import java.util.*;
+
 /**
  * Created with IntelliJ IDEA.
  * User: d.poberezhny
@@ -7,7 +9,7 @@ package Algorithms;
  * Time: 15:36
  * To change this template use File | Settings | File Templates.
  */
-public class RedBlackBST<Key extends Comparable<Key>, Value> {
+public class RedBlackBST<Key extends Comparable<Key>, Value> implements SortedMap<Key, Value> {
 
     private static final boolean RED   = true;
     private static final boolean BLACK = false;
@@ -30,26 +32,56 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         }
     }
 
-    public void put(Key key, Value val) {
+
+    //TODO refactored this method
+    @Override
+    public Value put(Key key, Value val) {
+        Value old = get(key);
         root = put(root, key, val);
         root.color = BLACK;
+        return null;
     }
 
     private Node put(Node h, Key key, Value val) {
-        if (h == null) return new Node(key, val, RED, 1);
+        if (h == null){
+            return new Node(key, val, RED, 1);
+        }
 
         int cmp = key.compareTo(h.key);
         if      (cmp < 0) h.left  = put(h.left,  key, val);
         else if (cmp > 0) h.right = put(h.right, key, val);
         else              h.val   = val;
 
-        // fix-up any right-leaning links
         if (isRed(h.right) && !isRed(h.left))      h = rotateLeft(h);
         if (isRed(h.left)  &&  isRed(h.left.left)) h = rotateRight(h);
         if (isRed(h.left)  &&  isRed(h.right))     flipColors(h);
         h.N = size(h.left) + size(h.right) + 1;
 
         return h;
+    }
+
+    @Override
+    public Value get(Object key){
+//        if(key instanceof Key)
+//            return get(root,(Key)key);
+//        else
+//            return null;
+        try{
+            return get(root,(Key)key);
+        }
+        catch (ClassCastException e){
+            return null;
+        }
+    }
+
+    private Value get(Node h, Key key){
+        if(h == null)
+            return null;
+
+        int cmp = key.compareTo(h.key);
+        if      (cmp < 0) return get(h.left, key);
+        else if (cmp > 0) return get(h.right, key);
+        else              return h.val;
     }
 
     private Node rotateRight(Node h) {
@@ -95,4 +127,85 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         if (x == null) return 0;
         return x.N;
     }
+
+    @Override
+    public Set<Entry<Key, Value>> entrySet() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public Comparator<? super Key> comparator() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public SortedMap<Key, Value> subMap(Key fromKey, Key toKey) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public SortedMap<Key, Value> headMap(Key toKey) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public SortedMap<Key, Value> tailMap(Key fromKey) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public Key firstKey() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public int size() {
+        return root.N;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean containsKey(Object key) {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean containsValue(Object value) {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public Value remove(Object key) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void putAll(Map<? extends Key, ? extends Value> m) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void clear() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public Key lastKey() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public Set<Key> keySet() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public Collection<Value> values() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
 }

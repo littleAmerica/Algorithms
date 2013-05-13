@@ -1,4 +1,4 @@
-package Algorithms.Graphs;
+package Algorithms.Graphs.Tools;
 
 import java.util.LinkedList;
 
@@ -18,7 +18,7 @@ public class Graph {
     private LinkedList<Integer> edgenodes[];
     private boolean isDirected;
     private int E;
-    final private int V;
+    private int V;
 
     public Graph(int V, boolean isDirected)
     {

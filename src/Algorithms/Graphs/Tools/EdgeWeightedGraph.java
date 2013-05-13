@@ -1,4 +1,6 @@
-package Algorithms.Graphs.MST;
+package Algorithms.Graphs.Tools;
+
+import Algorithms.Graphs.Tools.Edge;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -13,8 +15,8 @@ import java.util.List;
  */
 public class EdgeWeightedGraph {
     private LinkedList<Edge>[] adj;
-    int V;
-    int E = 0;
+    private int V;
+    private int E = 0;
     double weight = 0;
     
     public EdgeWeightedGraph(int V){

@@ -1,5 +1,8 @@
 package Algorithms.Graphs.MST;
 
+import Algorithms.Graphs.Tools.Edge;
+import Algorithms.Graphs.Tools.EdgeWeightedGraph;
+
 import java.util.ArrayDeque;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -21,9 +24,9 @@ public class Prim{
 
     public Prim(EdgeWeightedGraph G){
         this.G = G;
-        isMarked = new boolean[G.V];
+        isMarked = new boolean[G.V()];
         MST = new ArrayDeque<Edge>();
-        for(int i = 0; i < G.V; ++i)
+        for(int i = 0; i < G.V(); ++i)
             if(!isMarked[i])
                 findMST(i);
     }

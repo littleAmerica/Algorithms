@@ -1,5 +1,7 @@
 package Algorithms.Graphs.MST;
 
+import Algorithms.Graphs.Tools.Edge;
+import Algorithms.Graphs.Tools.EdgeWeightedGraph;
 import Algorithms.WeightedQuickUnion;
 
 import java.util.ArrayDeque;
@@ -22,8 +24,8 @@ public class Boruvka{
     private WeightedQuickUnion quickUnion;
 
     public Boruvka(EdgeWeightedGraph G){
-        quickUnion = new WeightedQuickUnion(G.V);
-        MST = new ArrayDeque<Edge>(G.V - 1);
+        quickUnion = new WeightedQuickUnion(G.V());
+        MST = new ArrayDeque<Edge>(G.V() - 1);
         findMST(G);
     }
 
@@ -37,7 +39,7 @@ public class Boruvka{
 
     private void findMST(EdgeWeightedGraph G){
         int k = G.E();
-        while(MST.size() < G.V - 1 && k != 0){
+        while(MST.size() < G.V() - 1 && k != 0){
             k /= 2;
             Edge[] shortest = new Edge[G.V()];
             for(Edge e: G.edges()){
@@ -52,7 +54,7 @@ public class Boruvka{
                 if(shortest[v] == null || e.weight() < shortest[v].weight())
                     shortest[v] = e;
             }
-            for(int i = 0; i < G.V; ++i)
+            for(int i = 0; i < G.V(); ++i)
                 if(shortest[i] != null){
                     int q = shortest[i].either();
                     int p = shortest[i].other(q);

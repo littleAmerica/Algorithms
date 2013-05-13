@@ -1,4 +1,4 @@
-package Algorithms.Graphs.MST;
+package Algorithms.Graphs.Tools;
 
 /**
  * Created with IntelliJ IDEA.

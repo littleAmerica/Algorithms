@@ -1,4 +1,4 @@
-package Algorithms.Graphs;
+package Algorithms.Graphs.Tools;
 
 /**
  * Created with IntelliJ IDEA.
@@ -7,17 +7,17 @@ package Algorithms.Graphs;
  * Time: 10:30
  * To change this template use File | Settings | File Templates.
  */
-class GraphProcessor {
+public class GraphProcessor {
 
-    protected void processVertexEarly(int v){
+    public void processVertexEarly(int v){
         //do Something
     }
 
-    protected void processVertexLate(int v){
+    public void processVertexLate(int v){
         //do Something
     }
 
-    protected void pocessEdge(int v1, int v2){
+    public void pocessEdge(int v1, int v2){
         //do Something
     }
 }
