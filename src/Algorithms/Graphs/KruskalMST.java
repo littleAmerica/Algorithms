@@ -1,4 +1,4 @@
-package Algorithms.Graphs.MST;
+package Algorithms.Graphs;
 
 import Algorithms.Graphs.Tools.Edge;
 import Algorithms.Graphs.Tools.EdgeWeightedGraph;
@@ -15,7 +15,7 @@ import java.util.Queue;
  * Time: 18:36
  * To change this template use File | Settings | File Templates.
  */
-public class Kruskal{
+public class KruskalMST {
 
     private Queue<Edge> MST;
     private double weight;
@@ -23,7 +23,7 @@ public class Kruskal{
     private PriorityQueue<Edge> pq = new PriorityQueue<Edge>();
     private WeightedQuickUnion quickUnion;
 
-    public Kruskal(EdgeWeightedGraph G){
+    public KruskalMST(EdgeWeightedGraph G){
         quickUnion = new WeightedQuickUnion(G.V());
         MST = new ArrayDeque<Edge>(G.V() - 1);
         findMST(G);

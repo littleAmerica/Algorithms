@@ -43,9 +43,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> implements SortedMa
     }
 
     private Node put(Node h, Key key, Value val) {
-        if (h == null){
-            return new Node(key, val, RED, 1);
-        }
+        if (h == null) return new Node(key, val, RED, 1);
 
         int cmp = key.compareTo(h.key);
         if      (cmp < 0) h.left  = put(h.left,  key, val);

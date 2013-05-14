@@ -1,4 +1,4 @@
-package Algorithms.Graphs.MST;
+package Algorithms.Graphs;
 
 import Algorithms.Graphs.Tools.Edge;
 import Algorithms.Graphs.Tools.EdgeWeightedGraph;
@@ -15,7 +15,7 @@ import java.util.Queue;
  * Time: 11:41
  * To change this template use File | Settings | File Templates.
  */
-public class Boruvka{
+public class BoruvkaMST {
 
     private Queue<Edge> MST;
     private double weight;
@@ -23,10 +23,11 @@ public class Boruvka{
     private PriorityQueue<Edge> pq = new PriorityQueue<Edge>();
     private WeightedQuickUnion quickUnion;
 
-    public Boruvka(EdgeWeightedGraph G){
+    public BoruvkaMST(EdgeWeightedGraph G){
         quickUnion = new WeightedQuickUnion(G.V());
         MST = new ArrayDeque<Edge>(G.V() - 1);
         findMST(G);
+
     }
 
     public double weight(){

@@ -1,7 +1,5 @@
 package Algorithms.Graphs.Tools;
 
-import Algorithms.Graphs.Tools.Edge;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;

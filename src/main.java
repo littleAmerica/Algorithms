@@ -1,8 +1,12 @@
-import Algorithms.RedBlackBST;
-import Algorithms.Sorting.*;
+import Algorithms.Graphs.DijkstraSPT;
+import Algorithms.Graphs.Tools.DirectedEdge;
+import Algorithms.Graphs.Tools.EdgeWeightedDigraph;
+import Algorithms.Sorting.Merge;
 
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
 
 /**
@@ -16,39 +20,24 @@ public class main{
 
     static public void main(String[] args){
 //        System.out.println();
-//        final int N = 10;
-//        EdgeWeightedGraph graph = new EdgeWeightedGraph(250);
-//        String graphstr = readFile("resource/EWG250.txt");
-//        for(String elem: graphstr.split("\n")){
-//            String[] edge = elem.split(" ");
-//            graph.add(new Edge(Integer.parseInt(edge[0]),Integer.parseInt(edge[1]), Double.parseDouble(edge[2])));
+        final int N = 250;
+        EdgeWeightedDigraph graph = new EdgeWeightedDigraph(N);
+        String graphstr = readFile("resource/EWD250.txt");
+        for(String elem: graphstr.split("\n")){
+            String[] edge = elem.split(" ");
+            graph.add(new DirectedEdge(Integer.parseInt(edge[0]),Integer.parseInt(edge[1]), Double.parseDouble(edge[2])));
+        }
+//        DijkstraSPT dijkstraSPT = new DijkstraSPT(graph,0);
+////        for(int i = 0; i < N; ++i)
+////            System.out.println(dijkstraSPT.distTo(i));
+//        for(DirectedEdge e: dijkstraSPT.pathTo(1)){
+//            System.out.println(e);
 //        }
-//        long timeout= System.currentTimeMillis();
-//        Prim prim = new Prim(graph);
-//        System.out.println("prim " + prim.weight() + " " + (System.currentTimeMillis() - timeout)/1000.0);
-//
-//        timeout= System.currentTimeMillis();
-//        Kruskal kruskal = new Kruskal(graph);
-//        System.out.println("kruskal " + kruskal.weight() + " " + (System.currentTimeMillis() - timeout)/1000.0);
-//
-//        timeout= System.currentTimeMillis();
-//        Boruvka boruvka = new Boruvka(graph);
-//        System.out.println("boruvka " + boruvka.weight() + " " + (System.currentTimeMillis() - timeout)/1000.0);
-
-//        Integer[] array = {4,5,6,7,3,9,2,3,2,1,4,7,7,5,4,3,2,1,4,6,7,8,6,5,6,7,8,6,4,3,3,5,6,7,8,4,3,2,4,5,6,7,4,3,2,21,4};
-//        System.out.println(Arrays.toString(array));
- //       Insertion.sort(array);
- //       System.out.println(Arrays.toString(array));
-
-        RedBlackBST<Character,Integer> redBlackBST = new RedBlackBST<Character, Integer>();
-        String red = "SEARCHEXAMPLE";
-        for(int i = 0; i < red.length(); ++i)
-            redBlackBST.put(red.charAt(i),i);
-
-        for(int i = 0; i < red.length(); ++i)
-            System.out.println(redBlackBST.get(red.charAt(i)));
-        System.out.print("\n" + redBlackBST.get(232));
-
+        Integer[] array = {4,6,3,4,3,2,4,5,7,8,9,7,5,4,};
+        Integer[] array2;
+        System.out.println(Arrays.toString(array));
+        Merge.sort(array);
+        System.out.println(Arrays.toString(array));
     }
 
 

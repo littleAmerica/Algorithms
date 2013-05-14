@@ -1,4 +1,4 @@
-package Algorithms.Graphs.MST;
+package Algorithms.Graphs;
 
 import Algorithms.Graphs.Tools.Edge;
 import Algorithms.Graphs.Tools.EdgeWeightedGraph;
@@ -14,7 +14,7 @@ import java.util.Queue;
  * Time: 22:31
  * To change this template use File | Settings | File Templates.
  */
-public class Prim{
+public class PrimMST {
     private Queue<Edge> MST;
     private double weight;
 
@@ -22,7 +22,7 @@ public class Prim{
     private boolean[] isMarked;
     private PriorityQueue<Edge> pq = new PriorityQueue<Edge>();
 
-    public Prim(EdgeWeightedGraph G){
+    public PrimMST(EdgeWeightedGraph G){
         this.G = G;
         isMarked = new boolean[G.V()];
         MST = new ArrayDeque<Edge>();

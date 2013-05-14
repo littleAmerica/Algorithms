@@ -3,7 +3,9 @@ package Algorithms.Graphs;
 import Algorithms.Graphs.Tools.DirectedEdge;
 import Algorithms.Graphs.Tools.EdgeWeightedDigraph;
 
-import java.util.*;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,6 +21,8 @@ public class DijkstraSPT {
 
 
     public DijkstraSPT(EdgeWeightedDigraph G, int start){
+        if(hasNegativeWeight(G))
+            throw new IllegalArgumentException("Graph has negative weight");
         distTo = new double[G.V()];
         edgeTo = new DirectedEdge[G.V()];
         for(int i = 0; i < G.V(); ++i)
@@ -50,10 +54,22 @@ public class DijkstraSPT {
     public Iterable<DirectedEdge> pathTo(int v){
         if(!isPath(v))
             return null;
-        Stack<DirectedEdge> path = new Stack<DirectedEdge>();
+        Deque<DirectedEdge> path = new LinkedList<DirectedEdge>();
         DirectedEdge e = edgeTo[v];
         while(e != null){
-            path.push(e);
+            path.addFirst(e);
+            e = edgeTo[e.from()];
+        }
+        return path;
+    }
+
+    public Iterable<DirectedEdge> pathToR(int v){
+        if(!isPath(v))
+            return null;
+        Deque<DirectedEdge> path = new LinkedList<DirectedEdge>();
+        DirectedEdge e = edgeTo[v];
+        while(e != null){
+            path.addLast(e);
             e = edgeTo[e.from()];
         }
         return path;
@@ -62,6 +78,14 @@ public class DijkstraSPT {
     public double distTo(int v){
         return distTo[v];
     }
+
+    private boolean hasNegativeWeight(EdgeWeightedDigraph G){
+        for(DirectedEdge e: G.edges())
+            if(e.weight() < 0.0)
+                return false;
+        return true;
+    }
+
 
     private class VertexMark implements Comparable<VertexMark>{
         int vertex;
