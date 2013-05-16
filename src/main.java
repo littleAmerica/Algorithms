@@ -1,13 +1,12 @@
-import Algorithms.Graphs.DijkstraSPT;
+import Algorithms.Graphs.DijkstraSP;
+import Algorithms.Graphs.BellmanFordSP;
 import Algorithms.Graphs.Tools.DirectedEdge;
 import Algorithms.Graphs.Tools.EdgeWeightedDigraph;
-import Algorithms.Sorting.Merge;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,17 +26,31 @@ public class main{
             String[] edge = elem.split(" ");
             graph.add(new DirectedEdge(Integer.parseInt(edge[0]),Integer.parseInt(edge[1]), Double.parseDouble(edge[2])));
         }
-//        DijkstraSPT dijkstraSPT = new DijkstraSPT(graph,0);
-////        for(int i = 0; i < N; ++i)
-////            System.out.println(dijkstraSPT.distTo(i));
+
+
+
+//        FloydWarshall fm = new FloydWarshall(graph);
+//        for(DirectedEdge e: fm.pathTo(4 - 1,2 - 1))
+//                System.out.println(e);
+
+
+        long dijkstra = System.currentTimeMillis();
+        DijkstraSP dijkstraSPT = new DijkstraSP(graph,0);
+        dijkstra = System.currentTimeMillis() - dijkstra;
+        long bellman = System.currentTimeMillis();
+        BellmanFordSP bellmanFordSP = new BellmanFordSP(graph,0);
+        bellman = System.currentTimeMillis() - bellman;
+        for(int i = 0; i < N; ++i)
+            System.out.println(dijkstraSPT.distTo(i) - bellmanFordSP.distTo(i));
+        System.out.println(dijkstra / 10.0 + " " + bellman / 10.0);
 //        for(DirectedEdge e: dijkstraSPT.pathTo(1)){
 //            System.out.println(e);
 //        }
-        Integer[] array = {4,6,3,4,3,2,4,5,7,8,9,7,5,4,};
-        Integer[] array2;
-        System.out.println(Arrays.toString(array));
-        Merge.sort(array);
-        System.out.println(Arrays.toString(array));
+//        Integer[] array = {4,6,3,4,3,2,4,5,7,8,9,7,5,4,};
+//        Integer[] array2;
+//        System.out.println(Arrays.toString(array));
+//        Merge.sort(array);
+//        System.out.println(Arrays.toString(array));
     }
 
 

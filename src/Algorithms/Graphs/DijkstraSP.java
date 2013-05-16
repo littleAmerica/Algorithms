@@ -14,13 +14,13 @@ import java.util.PriorityQueue;
  * Time: 18:17
  * To change this template use File | Settings | File Templates.
  */
-public class DijkstraSPT {
+public class DijkstraSP {
     private double[] distTo;
     private DirectedEdge[] edgeTo;
     private PriorityQueue<VertexMark> pq;
 
 
-    public DijkstraSPT(EdgeWeightedDigraph G, int start){
+    public DijkstraSP(EdgeWeightedDigraph G, int start){
         if(hasNegativeWeight(G))
             throw new IllegalArgumentException("Graph has negative weight");
         distTo = new double[G.V()];
@@ -32,17 +32,19 @@ public class DijkstraSPT {
         pq = new PriorityQueue<VertexMark>();
         pq.add(new VertexMark(start,distTo[start]));
         while(!pq.isEmpty()){
-            VertexMark smallest = pq.poll();
-            int current = smallest.vertex;
-            for(DirectedEdge edge: G.adj(current)){
-                int to = edge.to();
-                if(distTo[current] + edge.weight() < distTo[to]){
-                    distTo[to] = distTo[current] + edge.weight();
-                    edgeTo[to] = edge;
-                    VertexMark next = new VertexMark(to,distTo[to]);
-                    pq.remove(next);
-                    pq.add(next);
-                }
+            relaxation(G, pq.poll().vertex);
+        }
+    }
+
+    private void relaxation(EdgeWeightedDigraph G, int vertex){
+        for(DirectedEdge edge: G.adj(vertex)){
+            int to = edge.to();
+            if(distTo[vertex] + edge.weight() < distTo[to]){
+                distTo[to] = distTo[vertex] + edge.weight();
+                edgeTo[to] = edge;
+                VertexMark next = new VertexMark(to,distTo[to]);
+                pq.remove(next);
+                pq.add(next);
             }
         }
     }
@@ -82,8 +84,8 @@ public class DijkstraSPT {
     private boolean hasNegativeWeight(EdgeWeightedDigraph G){
         for(DirectedEdge e: G.edges())
             if(e.weight() < 0.0)
-                return false;
-        return true;
+                return true;
+        return false;
     }
 
 
