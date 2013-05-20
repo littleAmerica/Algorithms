@@ -4,6 +4,9 @@ import Algorithms.Graphs.Tools.DirectedEdge;
 import Algorithms.Graphs.Tools.EdgeWeightedDigraph;
 import com.sun.javafx.css.FontUnits;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 /**
  * Created with IntelliJ IDEA.
  * User: d.poberezhny
@@ -13,9 +16,12 @@ import com.sun.javafx.css.FontUnits;
  */
 public class BellmanFordSP {
     double[] distTo;
+    DirectedEdge[] edgeTo;
 
     public BellmanFordSP(EdgeWeightedDigraph G, int start){
         distTo = new double[G.V()];
+        edgeTo = new DirectedEdge[G.V()];
+
         for (int i = 0; i < G.V(); ++i)
             distTo[i] = Double.MAX_VALUE;
         distTo[start] = 0.0;
@@ -38,6 +44,7 @@ public class BellmanFordSP {
         boolean isOptimal = true;
         for (DirectedEdge e: G.edges()){
             if(distTo[e.to()] > distTo(e.from()) + e.weight()){
+                edgeTo[e.to()] = e;
                 distTo[e.to()] = distTo(e.from()) + e.weight();
                 isOptimal = false;
             }
@@ -45,29 +52,29 @@ public class BellmanFordSP {
         return isOptimal;
     }
 
-//    public Iterable<DirectedEdge> pathTo(int v){
-//        if(!isPath(v))
-//            return null;
-//        Deque<DirectedEdge> path = new LinkedList<DirectedEdge>();
-//        DirectedEdge e = edgeTo[v];
-//        while(e != null){
-//            path.addFirst(e);
-//            e = edgeTo[e.from()];
-//        }
-//        return path;
-//    }
+    public Iterable<DirectedEdge> pathTo(int v){
+        if(!isPath(v))
+            return null;
+        Deque<DirectedEdge> path = new LinkedList<DirectedEdge>();
+        DirectedEdge e = edgeTo[v];
+        while(e != null){
+            path.addFirst(e);
+            e = edgeTo[e.from()];
+        }
+        return path;
+    }
 
-//    public Iterable<DirectedEdge> pathToR(int v){
-//        if(!isPath(v))
-//            return null;
-//        Deque<DirectedEdge> path = new LinkedList<DirectedEdge>();
-//        DirectedEdge e = edgeTo[v];
-//        while(e != null){
-//            path.addLast(e);
-//            e = edgeTo[e.from()];
-//        }
-//        return path;
-//    }
+    public Iterable<DirectedEdge> pathToR(int v){
+        if(!isPath(v))
+            return null;
+        Deque<DirectedEdge> path = new LinkedList<DirectedEdge>();
+        DirectedEdge e = edgeTo[v];
+        while(e != null){
+            path.addLast(e);
+            e = edgeTo[e.from()];
+        }
+        return path;
+    }
 
     public double distTo(int v){
         return distTo[v];
