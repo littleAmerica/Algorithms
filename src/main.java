@@ -40,12 +40,16 @@ public class main{
         long bellman = System.currentTimeMillis();
         BellmanFordSP bellmanFordSP = new BellmanFordSP(graph,0);
         bellman = System.currentTimeMillis() - bellman;
-        for(int i = 0; i < N; ++i)
-            System.out.println(dijkstraSPT.distTo(i) - bellmanFordSP.distTo(i));
-        System.out.println(dijkstra / 10.0 + " " + bellman / 10.0);
-//        for(DirectedEdge e: dijkstraSPT.pathTo(1)){
-//            System.out.println(e);
-//        }
+//        for(int i = 0; i < N; ++i)
+//            System.out.println(dijkstraSPT.distTo(i) - bellmanFordSP.distTo(i));
+//        System.out.println(dijkstra / 10.0 + " " + bellman / 10.0);
+        for(DirectedEdge e: dijkstraSPT.pathToR(1)){
+            System.out.print(e + " ");
+        }
+        System.out.println();
+        for(DirectedEdge e: bellmanFordSP.pathToR(1)){
+            System.out.print(e + " ");
+        }
 //        Integer[] array = {4,6,3,4,3,2,4,5,7,8,9,7,5,4,};
 //        Integer[] array2;
 //        System.out.println(Arrays.toString(array));

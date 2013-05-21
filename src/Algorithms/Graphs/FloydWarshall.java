@@ -28,7 +28,6 @@ public class FloydWarshall {
                 distTo[i][j] = Double.MAX_VALUE;
             }
 
-
         for (DirectedEdge e: G.edges()){
             distTo[e.from()][e.to()] = e.weight();
             edgeTo[e.from()][e.to()] = e;
