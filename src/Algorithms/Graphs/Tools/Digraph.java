@@ -1,6 +1,5 @@
 package Algorithms.Graphs.Tools;
 
-import Algorithms.Graphs.Interfaces.Directable;
 import Algorithms.Graphs.Tools.DirectedEdge;
 
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ import java.util.List;
  * Time: 18:29
  * To change this template use File | Settings | File Templates.
  */
-public class Digraph implements Directable {
+public class Digraph{
     private LinkedList<DirectedEdge>[] adj;
     private int V;
     private int E = 0;
@@ -55,12 +54,10 @@ public class Digraph implements Directable {
         E++;
     }
 
-    @Override
     public int from() {
         return 0;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    @Override
     public int to() {
         return 0;  //To change body of implemented methods use File | Settings | File Templates.
     }
