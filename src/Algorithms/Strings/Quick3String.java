@@ -1,4 +1,4 @@
-package Algorithms.Sorting;
+package Algorithms.Strings;
 
 import java.util.Arrays;
 
@@ -9,14 +9,14 @@ import java.util.Arrays;
  * Time: 14:48
  * To change this template use File | Settings | File Templates.
  */
-public class Quick {
+public class Quick3String {
 
-    static public void sort(Comparable[] array)
+    static public void sort(String[] array)
     {
-        qsort(array,0,array.length);
+        qsort(array, 0, array.length, 0);
     }
 
-    static private void qsort(Comparable[] array, int from, int to)
+    static private void qsort(String[] array, int from, int to, int d)
     {
         if((to - from) <= 1)
             return;
@@ -25,19 +25,19 @@ public class Quick {
         int key = to - 1;
 
         while (true){
-            while(less(array[low], array[key])) low++;
-            while(less(array[key], array[high])) high--;
+            while(charAt(array[low], d) < charAt(array[key],d)) low++;
+            while(charAt(array[key], d) < charAt(array[high], d)) high--;
             if(low < high)
                 swap(array,low++,high--);
             else
                 break;
         }
-        swap(array,low, key);
-        qsort(array,from,low);
-        qsort(array,low + 1, to);
+        swap(array,low + 1, key);
+//        qsort(array,from,low);
+//        qsort(array,low + 1, to);
     }
 
-    private static boolean less(Comparable p, Comparable q){
+    private static boolean less(String p, String q){
         return p.compareTo(q) < 0;
     }
 
@@ -47,9 +47,13 @@ public class Quick {
         pq[j] = swap;
     }
 
+    private static int charAt(String str, int d){
+        return d < str.length() ? str.charAt(d) : -1;
+    }
+
     public static void main(String[] strings)
     {
-        Integer[] str = {3,4,5,34,3,2,4,36,34,23,12,4,1,4,35,6,53,41,232,454,65,76,23,1,34,56,476,34,56};
+        String[] str = {"asd","qwe", "123", "qwe", "zxc", "fgh", "asd", "dfg","rty","cvb","rty"};
         System.out.println(Arrays.toString(str));
         sort(str);
         System.out.println(Arrays.toString(str));
