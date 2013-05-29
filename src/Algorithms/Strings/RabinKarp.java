@@ -11,7 +11,7 @@ import java.util.Random;
  */
 public class RabinKarp {
     private static int R = 255;
-    private static long Q = new BigInteger(31,new Random()).nextProbablePrime().longValue();
+    private static long Q = 997;//new BigInteger(31,new Random()).nextProbablePrime().longValue();
 
     public static int search(String string, String pattern){
         int M = pattern.length();
@@ -27,26 +27,26 @@ public class RabinKarp {
         if(strPartHash == patternHash)
             return 0;
 
-        for(int i = 0; i < N - M - 1; ++i){
-            strPartHash = ((strPartHash + Q - RM * string.charAt(i) % Q) * R % Q + string.charAt(i + M)) % Q;
+        for(int i = 0; i < N - M; ++i){
+            strPartHash = ((strPartHash + Q - RM * string.charAt(i) % Q)* R % Q + string.charAt(i + M)) % Q;
             if(strPartHash == patternHash)
                 return i + 1;
         }
-
         return N;
     }
 
     private static long hash(String str, int from, int to){
         long hash = 0;
         for(int i = from; i < to; ++i)
-            hash = (hash * R + str.charAt(i)) % Q;
+            hash = (hash * R  % Q + str.charAt(i)) % Q;
         return hash;
     }
 
-
     public static void main(String[] args){
-            System.out.println(search("AdsfsdfFDD","dsfsdf"));
-
+        String s = "abacadabrabracabracadabrabrabracad";
+        String p = "rabracad";
+        int i = search(s, p);
+        System.out.println(i);
     }
 
 }

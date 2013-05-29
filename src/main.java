@@ -1,5 +1,6 @@
 import Algorithms.Graphs.DijkstraSP;
 import Algorithms.Graphs.BellmanFordSP;
+import Algorithms.Graphs.Tools.Digraph;
 import Algorithms.Graphs.Tools.DirectedEdge;
 import Algorithms.Graphs.Tools.EdgeWeightedDigraph;
 
@@ -21,6 +22,7 @@ public class main{
     static public void main(String[] args){
 //        System.out.println();
         final int N = 250;
+        Digraph d = new Digraph(4);
         EdgeWeightedDigraph graph = new EdgeWeightedDigraph(N);
         String graphstr = readFile("resource/EWD250.txt");
         for(String elem: graphstr.split("\n")){
